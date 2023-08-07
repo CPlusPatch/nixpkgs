@@ -26,13 +26,13 @@ let
 in
 buildGoPackage rec {
   pname = "container-toolkit/container-toolkit";
-  version = "1.9.0";
+  version = "1.13.5";
 
   src = fetchFromGitLab {
     owner = "nvidia";
     repo = pname;
     rev = "v${version}";
-    sha256 = "sha256-b4mybNB5FqizFTraByHk5SCsNO66JaISj18nLgLN7IA=";
+    sha256 = "sha256-yTdKh+76vEn8CYlJg+x8eW8iU/nfBlIkbVzPLU+gZ5k=";
   };
 
   goPackagePath = "github.com/NVIDIA/nvidia-container-toolkit";
@@ -43,7 +43,7 @@ buildGoPackage rec {
 
   preBuild = ''
     # replace the default hookDefaultFilePath to the $out path
-    substituteInPlace go/src/github.com/NVIDIA/nvidia-container-toolkit/cmd/nvidia-container-runtime/main.go \
+    substituteInPlace go/src/github.com/NVIDIA/nvidia-container-toolkit/internal/config/config.go \
       --replace '/usr/bin/nvidia-container-runtime-hook' '${placeholder "out"}/bin/nvidia-container-runtime-hook'
   '';
 
@@ -69,9 +69,10 @@ buildGoPackage rec {
     substituteInPlace $out/etc/nvidia-container-runtime/config.toml \
       --subst-var-by glibcbin ${lib.getBin glibc}
 
-    ln -s $out/bin/nvidia-container-{toolkit,runtime-hook}
+    ln -s $out/bin/nvidia-toolkit
+    ln -s $out/bin/nvidia-container-runtime-hook
 
-    wrapProgram $out/bin/nvidia-container-toolkit \
+    wrapProgram $out/bin/nvidia-toolkit \
       --add-flags "-config ${placeholder "out"}/etc/nvidia-container-runtime/config.toml"
   '';
 
