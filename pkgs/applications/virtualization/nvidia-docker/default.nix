@@ -1,13 +1,13 @@
 { stdenv, lib, fetchFromGitHub, callPackage }:
 stdenv.mkDerivation rec {
   pname = "nvidia-docker";
-  version = "2.5.0";
+  version = "2.13.0";
 
   src = fetchFromGitHub {
     owner = "NVIDIA";
     repo = pname;
     rev = "v${version}";
-    sha256 = "1n1k7fnimky67s12p2ycaq9mgk245fchq62vgd7bl3bzfcbg0z4h";
+    sha256 = "sPafh2FFj68pHHe9+fKk2PFYhVxp9lZhgpu361GhLfM=";
   };
 
   buildPhase = ''
