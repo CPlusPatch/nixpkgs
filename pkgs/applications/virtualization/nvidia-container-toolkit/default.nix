@@ -37,7 +37,7 @@ buildGoPackage rec {
 
   goPackagePath = "github.com/NVIDIA/nvidia-container-toolkit";
 
-  ldflags = [ "-s" "-w" ];
+  ldflags = [ "-s" "-w" "-extldflags=-Wl,-z,lazy" ];
 
   nativeBuildInputs = [ makeWrapper ];
 
