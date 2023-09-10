@@ -174,6 +174,7 @@ in {
         PrivateTmp = "yes";
         PrivateDevices = "yes";
         SecureBits = "keep-caps";
+        Type = "simple";
         AmbientCapabilities = "CAP_IPC_LOCK CAP_NET_BIND_SERVICE";
         CacheDirectory = "coder";
         CapabilityBoundingSet = "CAP_SYSLOG CAP_IPC_LOCK CAP_NET_BIND_SERVICE";
